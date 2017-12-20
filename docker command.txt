@@ -1,0 +1,1 @@
+docker run --rm -it -v ${pwd}:c:\api microsoft/dotnet 
