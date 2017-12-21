@@ -1,1 +1,30 @@
 docker run --rm -it -v ${pwd}:c:\api microsoft/dotnet 
+
+# create privte registry 
+create folder structure and map folder 
+infra/registry  
+ create docker-compose.yml file and run docker-compose up -d
+it would create registry continer
+you can check localhost:55000(docker-compose.yml specified)/v2/_ctalog
+you can edit hot file and create alise of registry and have same in other machine too. "notepad C:\Windows\System32\drivers\etc\hosts" 
+like : 127.0.0.1 my-registry(Name from docker-compose.yml)
+now you can use my-registry:55000(docker-compose.yml specified)/v2/_ctalog
+
+# push image in to local private resitry 
+open docker settings and go to Daemon 
+specify insecure regisries (the one you have create) and click apply. 
+my-registry:55000 
+To verify 
+docker info
+# tag image to push in to registy 
+docker tag exitingimage:tag registry:port/nameforimage:tag
+docker tag aspnetcore/generator:multi 
+my-registry:55000/aspnetcore/generator:multi
+
+# after tag check docker Images 
+#now push 
+docker push my-registry:55000/aspnetcore/generator:multi
+#verify
+http://my-registry:55000/v2/_catlog
+http://my-registry:55000/v2/aspnetcore/generator/tags/list
+ 
